@@ -5,6 +5,6 @@
 Check ``environment.txt`` and ``requirements.txt``.
 
 ## How To Use:
-0. **The preprocessing seems to be failing due to multithreading/URL request failure. I'll add gdrive link of the images and image path added .parquets to the notebook to ensure same train pipeline.**
+0. _**The preprocessing seems to be failing due to multithreading/URL request failure. I'll add gdrive link of the images and image path added .parquets to the notebook to ensure same train pipeline.**_
 1. Place the raw data files in the ``data/raw/`` path.
 2. Open ``code/Ovis2.5-9B.ipynb`` and follow along the code and markdown instructions.
