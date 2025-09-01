@@ -1,0 +1,6 @@
+Processor: 16 vCore
+Memory: 192 GiB
+Storage: 128 GiB
+Accelerators: A100 80GB PCIe
+
+Python 3.10.14
