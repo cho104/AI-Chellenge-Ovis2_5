@@ -6,4 +6,4 @@ Check ``environment.txt`` and ``requirements.txt``.
 
 ## How To Use:
 1. Place the raw data files in the ``data/raw/`` path.
-2. Open ``code/Ovis2.5-9B.ipynb`` and follow the instruction.
+2. Open ``code/Ovis2.5-9B.ipynb`` and follow along the code and markdown instructions.
