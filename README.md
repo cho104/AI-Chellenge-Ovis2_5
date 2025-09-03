@@ -75,7 +75,7 @@ The initial cells in the notebook download all images from URLs provided in the 
 ***Note:*** *This preprocessing step can be prone to failures due to network issues or broken URLs. If you encounter problems, please use the pre-processed and converted data files provided in the download links above.*
 
 #### b. Custom Dataset Creation
-The script then transforms the preprocessed data into a `.jsonl` format tailored for the MS-Swift training framework. Task-specific prompts are engineered to guide the model's responses for each of the five tasks (captioning, vqa, summarization, text_qa, math_reasoning).
+The script then transforms the preprocessed data into a `.jsonl` format tailored for the MS-Swift training framework. Task-specific prompts are engineered to guide the model's responses for each of the five tasks (captioning, vqa, summarization, text_qa, math_reasoning). During the process, easy (short) text_qa questions and 30% of the text_qa questions will be dropped for stratification purpose. 10% of the whole dataset will be reserved for the validation set additionally.
 
 #### c. Model Training
 The training process is divided into two phases using the MS-Swift framework.
