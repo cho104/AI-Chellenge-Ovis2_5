@@ -1,0 +1,1 @@
+Create train_images, test_images directories here.

@@ -1,0 +1,1 @@
+Image path included parquets will be placed here.
