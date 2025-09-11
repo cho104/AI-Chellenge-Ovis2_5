@@ -98,7 +98,8 @@ The model was trained for a total of 2733 steps.
 | Metric | Value |
 | :--- | :--- |
 | **Total Train Runtime** | 8h 12m |
-| **Min Train Loss** | 0.179783 (Model saturated after 2104/2733 steps) |
+| **Min Train Loss** | 0.179783 at 2104/2733 steps |
+Minimum train loss is not an evident indication of saturated model as we use randomized batch selection with potentially different number of examples per a task. In fact, the model was actually able to gradually reduce the train loss and improve train accuracy as seen on the smoothened train loss plot (w/ smoothing weight 0.9, Exponential Moving Average (EMA) was used.
 
 ### Performance Graphs
 
