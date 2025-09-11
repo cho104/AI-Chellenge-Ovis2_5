@@ -98,7 +98,7 @@ The model was trained for a total of 2733 steps.
 | Metric | Value |
 | :--- | :--- |
 | **Total Train Runtime** | 8h 12m |
-| **Min Train Loss** | 0.179783 at 2104/2733 steps |
+| **Min Train Loss** | 0.179783 @ 2104/2733 |
 
 The minimum training loss does not serve as a definitive indication of model saturation as the number of examples per task can differ due to randomized batch selection. On the contrary, the model has shown a progressive decrease in the following smoothed training loss plot, which utilized Exponential Moving Average (EMA) with a smoothing weight of 0.9.
 
