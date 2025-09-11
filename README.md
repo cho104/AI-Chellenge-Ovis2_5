@@ -41,8 +41,6 @@ pip install -r requirements.txt
 │   ├── logs
 │   ├── output_dft_loss
 │   │   └── v0-20250828-230749
-│   │       ├── checkpoint-2000 (download via Google Drive)
-│   │       ├── ...
 │   │       └── checkpoint-2733 (download via Google Drive)
 │   └── Ovis2.5-9B.ipynb
 ├── data
