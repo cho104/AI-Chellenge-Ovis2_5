@@ -8,10 +8,10 @@ This repository contains the code and resources for the 1st place solution in th
 
 Due to GitHub's file size limitations, the model checkpoints, processed datasets, and downloaded images are not included in this repository. Please download them from the following links and place them in the appropriate directories.
 
-*   **[Download Checkpoints (TBD)]()** -> Unzip and place the contents into `code/output_dft_loss/v0-20250828-230749/`
+*   **[Download Checkpoints](https://drive.google.com/file/d/1MkqP48_tDCEAQ0wV5t-jLMcmPNbN2Jih/view?usp=sharing)** -> Unzip and place the checkpoint directory `v0-20250828-230749` into `code/output_dft_loss/`
 *   **[Download Converted Data](https://drive.google.com/file/d/1HMUs2MQiu8okNZOwsCdFG1c9_PBXifdL/view?usp=sharing)** -> Unzip and place the `.parquet` files into `data/converted/` (You don't need this directory for just an inference.)
 *   **[Download Train/Test Ready Dataset](https://drive.google.com/file/d/1kMtcuviMQbMLHtbYl7gIs04fGIJ-tEDL/view?usp=sharing)** -> Unzip and place the `.jsonl` files into `data/dataset/`
-*   **[Download Image Data](https://drive.google.com/file/d/1EjHIfgIpWW5jZF2FXDMe6mfWXWxysGlr/view?usp=sharing)** -> Unzip and place the image folders into `data/image/sample_images`, `data/image/train_images`, and `data/image/test_images`.
+*   **[Download Image Data](https://drive.google.com/file/d/1EjHIfgIpWW5jZF2FXDMe6mfWXWxysGlr/view?usp=sharing)** -> Unzip and place each of image directories into `data/image/sample_images`, `data/image/train_images`, and `data/image/test_images`.
 
 ---
 
@@ -30,6 +30,7 @@ All required Python packages are listed in `requirements.txt`. You can install t
 ```bash
 pip install -r requirements.txt
 ```
+If you are not on the same environment, the flash_attention installation might raise an error. In that case, remove flash_attn line from the `requirements.txt` and install `flash_attn==2.7.4.post1` separately.
 
 ---
 
@@ -59,7 +60,7 @@ pip install -r requirements.txt
 
 ## How to Use
 
-Follow these steps to replicate the training and inference pipeline.
+Follow these steps to replicate the entire training and inference pipeline.
 
 ### Step 1: Data Preparation
 Place the raw competition data files into the `data/raw/` directory.
