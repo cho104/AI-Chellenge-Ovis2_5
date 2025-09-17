@@ -61,6 +61,86 @@ If you are not on the same environment, the flash_attention installation might r
 
 ---
 
+## How to Use 101 (for just a Huggingface Transformer Inference
+Let's start with checkpoint download. Since the model is exported from the MS-Swift, you may use the converted/default directory in the HF.
+```bash
+curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
+sudo apt-get install git-lfs
+git-lfs clone https://huggingface.co/chio4696/Ovis-2.5-SFT-2733
+```
+
+```python
+import torch
+import requests
+from PIL import Image
+from transformers import AutoModelForCausalLM
+import pandas as pd
+import os
+
+IMAGE_PATH = 'AI-Chellenge-Ovis2_5/data/image/'
+
+model = AutoModelForCausalLM.from_pretrained(
+    "Ovis-2.5-SFT-2733/converted/default",
+    torch_dtype=torch.bfloat16,
+    trust_remote_code=True
+).cuda()
+
+def inference_on_data(row):
+    image_path = ""
+    task = row['task']
+    question = row['question']
+    if task == 'captioning':
+        text = 'Generate a single, detailed, and objective descriptive paragraph for the given image. Each description must begin with the phrase "The image is..." or "The image shows...", followed by a structured analysis that moves from the main subject to its details, and then to the background elements. You must use positional language, such as "on the left" or "at the top of the cover" to clearly orient the reader. If any text is visible in the image, transcribe it exactly and describe its visual characteristics like color and style. Conclude the entire description with a sentence that summarizes the overall atmosphere of the image, using a phrase like "The overall mood of the image is...". Throughout the paragraph, maintain a strictly factual, declarative tone with specific, descriptive vocabulary, avoiding any personal opinions or interpretations.'
+        image_path = os.path.join(IMAGE_PATH, row['input'])
+    elif task == 'vqa':
+        text = f'Given a document image and a question, extract the precise answer. Your response must be only the literal text found in the image, with no extra words or explanation.\n\nQuestion: {question}'
+        image_path = os.path.join(IMAGE_PATH, row['input'])
+    elif task == 'summarization':
+        text = f"Generate a summary of the following legislative text. Start with the bill's official title, then state its primary purpose and key provisions. Use formal, objective language and focus on the actions the bill takes, such as what it amends, requires, prohibits, or establishes.\n\nText: {row['input']}"
+    elif task == 'text_qa':
+        text = f"Given a context and a question, extract the most concise, direct answer from the text. Your answer should be a short phrase, not a complete sentence.\n\nContext: {row['input']}\n\nQuestion: {question}"
+    elif task == 'math_reasoning':
+        text = f"Given a math word problem, solve the question by generating a step-by-step reasoning process. After detailing all the steps in your reasoning, you must conclude your response by placing the final numerical answer on its own separate line, prefixed with #### .\n\nQuestion: {row['input']}"
+    messages = [{
+        "role": "user",
+        "content": [
+            {"type": "image", "image": Image.open(image_path) if image_path else None},
+            {"type": "text", "text": text},
+        ],
+    }]
+    
+    input_ids, pixel_values, grid_thws = model.preprocess_inputs(
+        messages=messages,
+        add_generation_prompt=True,
+        enable_thinking=True
+    )
+    input_ids = input_ids.cuda()
+    pixel_values = pixel_values.cuda() if pixel_values is not None else None
+    grid_thws = grid_thws.cuda() if grid_thws is not None else None
+    
+    outputs = model.generate(
+        inputs=input_ids,
+        pixel_values=pixel_values,
+        grid_thws=grid_thws,
+        enable_thinking=True,
+        enable_thinking_budget=True,
+        max_new_tokens=8192,
+        thinking_budget=4096,
+    )
+    
+    return model.text_tokenizer.decode(outputs[0], skip_special_tokens=True), text
+
+test_df = pd.read_parquet("AI-Chellenge-Ovis2_5/data/converted/deep_chal_multitask_dataset_test_path_converted.parquet") // Should be able to feed the function with local image path
+test_df = test_df.groupby('task').head(5) // Simple task-stratified samples
+
+inference_result = dict()
+for _, row in test_df.iterrows():
+    y, x = inference_on_data(row)
+    inference_result[x] = y
+    
+inference_df = pd.DataFrame(inference_result.items(), columns=['In', 'Out'])
+```
+
 ## How to Use
 
 Follow these steps to replicate the entire training and inference pipeline.
