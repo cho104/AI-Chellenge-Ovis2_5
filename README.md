@@ -130,8 +130,8 @@ def inference_on_data(row):
     
     return model.text_tokenizer.decode(outputs[0], skip_special_tokens=True), text
 
-test_df = pd.read_parquet("AI-Chellenge-Ovis2_5/data/converted/deep_chal_multitask_dataset_test_path_converted.parquet") // Should be able to feed the function with local image path
-test_df = test_df.groupby('task').head(5) // Simple task-stratified samples
+test_df = pd.read_parquet("AI-Chellenge-Ovis2_5/data/converted/deep_chal_multitask_dataset_test_path_converted.parquet") # Should be able to feed the function with local image path
+test_df = test_df.groupby('task').head(5) # Simple task-stratified samples
 
 inference_result = dict()
 for _, row in test_df.iterrows():
