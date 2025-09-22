@@ -61,7 +61,7 @@ If you are not on the same environment, the flash_attention installation might r
 
 ---
 
-## How to Use 101 (for just a Huggingface Transformer Inference
+## How to Use (for a Huggingface Transformer Inference)
 Let's start with checkpoint download. Since the model is exported from the MS-Swift, you may use the converted/default directory in the HF.
 ```bash
 curl -s https://packagecloud.io/install/repositories/github/git-lfs/script.deb.sh | sudo bash
