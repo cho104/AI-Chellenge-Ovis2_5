@@ -1,6 +1,6 @@
 # AI-Challenge-Ovis2_5
 
-**아주소중한딥러닝챌린지: 2025 SW중심대학사업 참여대학 공동 AI 경진대회 - Private LB 1st Place**
+**2025 SW중심대학사업 참여대학 공동 AI 경진대회 - Private LB 1st Place**
 
 This repository contains the code and resources for the 1st place solution in the 2025 AI Challenge. The project focuses on fine-tuning the `AIDC-AI/Ovis2.5-9B` multimodal model to perform a variety of tasks including visual question answering, image captioning, text summarization, and mathematical reasoning.
 
